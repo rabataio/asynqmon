@@ -103,7 +103,7 @@ func makeRedisConnOpt(cfg *Config) (asynq.RedisConnOpt, error) {
 
 	// Connecting to redis-sentinels
 	if strings.HasPrefix(cfg.RedisURL, "redis-sentinel") {
-		res, err := asynq.ParseRedisURI(cfg.RedisURL)
+		res, err := ParseRedisURI(cfg.RedisURL)
 		if err != nil {
 			return nil, err
 		}
@@ -115,7 +115,7 @@ func makeRedisConnOpt(cfg *Config) (asynq.RedisConnOpt, error) {
 	// Connecting to single redis server
 	var connOpt asynq.RedisClientOpt
 	if len(cfg.RedisURL) > 0 {
-		res, err := asynq.ParseRedisURI(cfg.RedisURL)
+		res, err := ParseRedisURI(cfg.RedisURL)
 		if err != nil {
 			return nil, err
 		}
