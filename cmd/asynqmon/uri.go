@@ -101,9 +101,13 @@ func parseRedisSentinelURI(u *url.URL) (asynq.RedisConnOpt, error) {
 
 	dbStr := query.Get("db")
 
-	db, err := strconv.Atoi(dbStr)
-	if err != nil {
-		return nil, err
+	db := 0
+	if dbStr != "" {
+		var err error
+		db, err = strconv.Atoi(dbStr)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return asynq.RedisFailoverClientOpt{
